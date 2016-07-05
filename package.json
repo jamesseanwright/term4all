@@ -17,11 +17,13 @@
   "author": "James Wright <james@jamesswright.co.uk>",
   "license": "ISC",
   "devDependencies": {
-    "babel-cli": "^6.10.1",
-    "babel-preset-react": "^6.11.1",
-    "electron-prebuilt": "^1.2.5"
+    "babel-cli": "6.10.1",
+    "babel-preset-react": "6.11.1",
+    "electron-prebuilt": "1.2.5"
   },
   "dependencies": {
-    "react": "^15.2.0"
+    "body-parser": "1.15.2",
+    "express": "4.14.0",
+    "react": "15.2.0"
   }
 }
