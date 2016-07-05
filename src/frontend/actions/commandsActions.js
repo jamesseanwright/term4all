@@ -10,50 +10,42 @@ module.exports = {
 
 	_requestCommand(command) {
 		return {
-			type: REQUEST_COMMAND,
+			type: this.REQUEST_COMMAND,
 			command
 		};
 	},
 
-	_receiveCommandOutput(message) {
+	_receiveCommandOutput(command) {
 		return {
-			type: RECEIVE_COMMAND_OUTPUT,
-			message
+			type: this.RECEIVE_COMMAND_OUTPUT,
+			command
 		};
 	},
 
 	_receiveCommandError(error) {
 		return {
-			type: RECEIVE_COMMAND_ERROR,
+			type: this.RECEIVE_COMMAND_ERROR,
 			error
 		};
 	},
 
 	_receiveCommandEnd(exitCode) {
 		return {
-			type: RECEIVE_COMMAND_END,
+			type: this.RECEIVE_COMMAND_END,
 			exitCode
 		};
 	},
 
 	runCommand(command) {
 		return (dispatch, getState) => {
-			return new Promise((resolve, reject) => {
-				dispatch(this._requestCommand(command));
+			dispatch(this._requestCommand(command));
 
-				commandClient.begin(command);
-				commandClient.on('message', message => dispatch(this._receiveCommandOutput(message)));
-				commandClient.on('error', error => dispatch(this._receiveCommandError(error)));
-				
-				commandClient.on('end', exitCode => {
-					dispatch(this._receiveCommandEnd(exitCode));
-
-					if (exitCode > 0) {
-						reject();
-					} else {
-						resolve();
-					}
-				});
+			commandClient.begin(command);
+			commandClient.on('message', message => dispatch(this._receiveCommandOutput(message)));
+			commandClient.on('error', error => dispatch(this._receiveCommandError(error)));
+			
+			commandClient.on('end', exitCode => {
+				dispatch(this._receiveCommandEnd(exitCode));
 			});
 		};
 	}

@@ -31,6 +31,7 @@
     "react-dom": "15.2.0",
     "react-redux": "4.4.5",
     "redux": "3.5.2",
+    "redux-thunk": "2.1.0",
     "ws": "1.1.1"
   }
 }

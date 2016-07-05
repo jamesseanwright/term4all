@@ -4,30 +4,29 @@ const EventEmitter = require('events');
 
 function CommandClient() {
 	this.webSocket = new WebSocket('ws://localhost:9002');
+	this.webSocket.onmessage = message => this.onMessage(JSON.parse(message.data));	
 }
 
 CommandClient.prototype = Object.create(EventEmitter.prototype);
 
 CommandClient.prototype.begin = function begin(command) {
-	this.webSocket.onmessage = message => this.onMessage(message.data);
-
 	this.webSocket.send(JSON.stringify({ command }));
 };
 
-CommandClient.prototype.onMessage = function onMessage(data) {
+CommandClient.prototype.onMessage = function onMessage(message) {
+
 	/* A bit crappy, but payloads only ever have one prop
 	 * could also do dynamic lookup based upon the one
 	 * prop, but I'd rather be explicit. */
-	
-	switch (Object.keys(data)[0]) {
+	switch (Object.keys(message)[0]) {
 		case 'message':
-			this.emit('message', data.message);
+			this.emit('message', message.message);
 
 		case 'error':
-			this.emit('error', data.error);
+			this.emit('error', message.error);
 
 		case 'exitCode':
-			this.emit('exitCode', data.exitCode);
+			this.emit('exitCode', message.exitCode);
 
 		default:
 			this.emit('error', 'unrecognised message type');

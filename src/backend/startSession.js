@@ -6,7 +6,7 @@ function parseMessage(message) {
 	let parsedMessage;
 
 	try {
-		JSON.parse(message);
+		parsedMessage = JSON.parse(message);
 	} catch (e) {
 		return null;
 	}
@@ -15,6 +15,8 @@ function parseMessage(message) {
 }
 
 module.exports = function startSession(websocket) {
+	console.log('WebSocket connection established!');
+
 	websocket.on('message', function onMessage(message) {
 		const command = parseMessage(message);
 

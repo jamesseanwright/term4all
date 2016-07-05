@@ -2,25 +2,37 @@
 
 const React = require('react');
 const { connect } = require('react-redux');
+const commandsActions = require('../actions/commandsActions');
 
 function App(props) {
-	const { output } = props;
-	const outputChildren = output.map(o => <li className="output__item">o</li>); 
+	const { output, runCommand } = props;
+	const outputChildren = output.map(o => <li className="output__item">{o}</li>); 
 
 	return (
 		<div>
 			<ul className="output">
 				{outputChildren}
 			</ul>
-			<input type="text" value="Command pls" />
+			<input type="text" onKeyUp={runCommand} />
 		</div>
 	);
 };
 
 function mapStateToProps(state) {
 	return {
-		output: state.commands.output
+		output: state.commands
 	};
 }
 
-module.exports = connect(mapStateToProps)(App);
+function mapDispatchToProps(dispatch) {
+	return {
+		runCommand(e) {
+			if (e.key !== 'Enter') return;
+
+			dispatch(commandsActions.runCommand(e.target.value));
+			e.target.value = '';			
+		}
+	};
+}
+
+module.exports = connect(mapStateToProps, mapDispatchToProps)(App);
