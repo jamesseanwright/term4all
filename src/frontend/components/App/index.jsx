@@ -2,18 +2,19 @@
 
 const React = require('react');
 const { connect } = require('react-redux');
-const commandsActions = require('../actions/commandsActions');
+const commandsActions = require('../../actions/commandsActions');
 
 function App(props) {
 	const { output, runCommand } = props;
 	const outputChildren = output.map(o => <li key={o.id} className="output__item">{o.value}</li>); 
 
 	return (
-		<div>
-			<ul className="output">
+		<div className="terminal">
+			<ul className="terminal__output">
 				{outputChildren}
 			</ul>
-			<input type="text" onKeyUp={runCommand} />
+
+			<input className="terminal__input" type="text" onKeyUp={runCommand} />
 		</div>
 	);
 };
