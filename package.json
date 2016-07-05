@@ -2,8 +2,10 @@
   "name": "term4all",
   "version": "0.0.1",
   "description": "A cross-platform terminal emulator for everyone",
-  "main": "dist/index.js",
+  "main": "dist/backend/server.js",
   "scripts": {
+    "build": "./tasks/build.sh",
+    "dev": "npm run build && node dist/backend/server",
     "test": "\"echo \\\"No tests yet :(\\\"\""
   },
   "keywords": [
@@ -17,17 +19,18 @@
   "author": "James Wright <james@jamesswright.co.uk>",
   "license": "ISC",
   "devDependencies": {
-    "babel-cli": "6.10.1",
     "babel-preset-react": "6.11.1",
+    "babelify": "7.3.0",
+    "browserify": "13.0.1",
     "electron-prebuilt": "1.2.5"
   },
   "dependencies": {
-    "body-parser": "1.15.2",
     "express": "4.14.0",
+    "immutable": "3.8.1",
     "react": "15.2.0",
-    "react-dom": "^15.2.0",
-    "react-redux": "^4.4.5",
-    "redux": "^3.5.2",
-    "ws": "^1.1.1"
+    "react-dom": "15.2.0",
+    "react-redux": "4.4.5",
+    "redux": "3.5.2",
+    "ws": "1.1.1"
   }
 }

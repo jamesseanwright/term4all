@@ -1,6 +1,6 @@
 'use strict';
 
-const commandClient = require('./clients/commandClient');
+const commandClient = require('../clients/commandClient');
 
 module.exports = { 
 	REQUEST_COMMAND: 'REQUEST_COMMAND',
