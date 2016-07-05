@@ -20,7 +20,10 @@ router.post('/command', function runCommand(req, res) {
 	commandRunner.begin(req.body.command);
 
 	commandRunner.on('message', message => res.write(`data: ${message}`));
+	commandRunner.on('error', error => res.write(`data: ${error}`));
 	commandRunner.on('end', exitCode => res.end(`data: ${exitCode}`));
 });
 
+/* TODO: export method to create router, so dependencies
+ * are injectable */
 module.exports = router;

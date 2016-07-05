@@ -8,7 +8,7 @@ const server = http.createServer(app);
 
 const PORT = 9001;
 
-app.use(express.static(__dirname + '/app'));
+app.use(express.static(__dirname + '/frontend'));
 app.use('/api', api);
 
 server.listen(PORT, () => {
