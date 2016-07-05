@@ -12,8 +12,8 @@ CommandRunner.prototype = Object.create(EventEmitter.prototype);
 CommandRunner.prototype.begin = function begin(command) {
 	const childProcess = spawn(command);
 
-	childProcess.stdout.on('data', data => this.emit('message', data.toString()));
-	childProcess.stderr.on('data', data => this.emit('error', data.toString()));
+	childProcess.stdout.on('data', data => this.emit('output', data.toString()));
+	childProcess.stderr.on('data', error => this.emit('error', error.toString()));
 	childProcess.on('close', exitCode => this.emit('end', exitCode.toString()));
 };
 

@@ -14,19 +14,22 @@ CommandClient.prototype.begin = function begin(command) {
 };
 
 CommandClient.prototype.onMessage = function onMessage(message) {
-
 	/* A bit crappy, but payloads only ever have one prop
 	 * could also do dynamic lookup based upon the one
 	 * prop, but I'd rather be explicit. */
+	
 	switch (Object.keys(message)[0]) {
-		case 'message':
-			this.emit('message', message.message);
+		case 'output':
+			this.emit('output', message.output);
+			break;
 
 		case 'error':
 			this.emit('error', message.error);
+			break;
 
 		case 'exitCode':
 			this.emit('exitCode', message.exitCode);
+			break;
 
 		default:
 			this.emit('error', 'unrecognised message type');

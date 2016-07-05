@@ -9,22 +9,31 @@ const {
 	RECEIVE_COMMAND_END
 } = require('../actions/commandsActions');
 
+function pushWithId({ state, value }) {
+	return state.push({
+		id: Date.now() + value.trim(),
+		value
+	});
+}
+
 module.exports = function commands(state = List(), action) {
+	console.log(action);
+
 	switch (action.type) {
 		case REQUEST_COMMAND:
-			state = state.push(action.command);
+			state = pushWithId({ state, value: action.command });
 			return state;
 
 		case RECEIVE_COMMAND_OUTPUT:
-			state = state.push(action.command);
+			state = pushWithId({ state, value: action.output });
 			return state;
 
 		case RECEIVE_COMMAND_ERROR:
-			state = state.push(action.error);
+			state = pushWithId({ state, value: action.error });
 			return state;
 
 		case RECEIVE_COMMAND_END:
-			state = state.push(`Process exited with ${action.exitCode}`);
+			state = pushWithId({ state, value: `Process exited with ${action.exitCode}` });
 			return state;
 
 		default:

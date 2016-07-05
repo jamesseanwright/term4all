@@ -15,10 +15,10 @@ module.exports = {
 		};
 	},
 
-	_receiveCommandOutput(command) {
+	_receiveCommandOutput(output) {
 		return {
 			type: this.RECEIVE_COMMAND_OUTPUT,
-			command
+			output
 		};
 	},
 
@@ -41,7 +41,7 @@ module.exports = {
 			dispatch(this._requestCommand(command));
 
 			commandClient.begin(command);
-			commandClient.on('message', message => dispatch(this._receiveCommandOutput(message)));
+			commandClient.on('output', output => dispatch(this._receiveCommandOutput(output)));
 			commandClient.on('error', error => dispatch(this._receiveCommandError(error)));
 			
 			commandClient.on('end', exitCode => {

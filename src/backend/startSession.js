@@ -26,7 +26,7 @@ module.exports = function startSession(websocket) {
 
 		commandRunner.begin(command);
 
-		commandRunner.on('message', message => websocket.send(JSON.stringify({ message })));
+		commandRunner.on('output', output => websocket.send(JSON.stringify({ output })));
 		commandRunner.on('error', error => websocket.send(JSON.stringify({ error })));
 		commandRunner.on('end', exitCode => websocket.send(JSON.stringify({ exitCode })));
 	});
