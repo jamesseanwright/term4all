@@ -17,4 +17,4 @@ CommandRunner.prototype.begin = function begin(command) {
 	childProcess.on('close', exitCode => this.emit('end', exitCode));
 };
 
-module.exports = CommandRunner;
+module.exports = new CommandRunner();

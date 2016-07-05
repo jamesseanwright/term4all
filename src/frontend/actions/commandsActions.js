@@ -22,10 +22,10 @@ module.exports = {
 		};
 	},
 
-	_receiveCommandError(message) {
+	_receiveCommandError(error) {
 		return {
 			type: RECEIVE_COMMAND_ERROR,
-			message
+			error
 		};
 	},
 
@@ -43,7 +43,7 @@ module.exports = {
 
 				commandClient.begin(command);
 				commandClient.on('message', message => dispatch(this._receiveCommandOutput(message)));
-				commandClient.on('error', message => dispatch(this._receiveCommandError(message)));
+				commandClient.on('error', error => dispatch(this._receiveCommandError(error)));
 				
 				commandClient.on('end', exitCode => {
 					dispatch(this._receiveCommandEnd(exitCode));
