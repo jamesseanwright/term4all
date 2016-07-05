@@ -1,0 +1,27 @@
+{
+  "name": "term4all",
+  "version": "0.0.1",
+  "description": "A cross-platform terminal emulator for everyone",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "\"echo \\\"No tests yet :(\\\"\""
+  },
+  "keywords": [
+    "terminal",
+    "emulator",
+    "command",
+    "line",
+    "react",
+    "electron"
+  ],
+  "author": "James Wright <james@jamesswright.co.uk>",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.10.1",
+    "babel-preset-react": "^6.11.1",
+    "electron-prebuilt": "^1.2.5"
+  },
+  "dependencies": {
+    "react": "^15.2.0"
+  }
+}
