@@ -4,7 +4,7 @@ const EventEmitter = require('events');
 const spawn = require('child_process').spawn;
 
 function CommandRunner() {
-	this.shell = '/bin/sh';
+	this.shell = '/bin/bash';
 }
 
 CommandRunner.prototype = Object.create(EventEmitter.prototype);
@@ -14,7 +14,9 @@ CommandRunner.prototype.begin = function begin(command) {
 	const commandName = commandParts[0];
 	const args = commandParts.slice(1, commandParts.length);
 
-	const childProcess = spawn(commandName, args);
+	const childProcess = spawn(commandName, args, {
+		shell: this.shell
+	});
 
 	childProcess.stdout.on('data', data => this.emit('output', data.toString()));
 	childProcess.stderr.on('data', error => this.emit('error', error.toString()));

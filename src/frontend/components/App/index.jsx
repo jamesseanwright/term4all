@@ -14,7 +14,9 @@ function App(props) {
 				{outputChildren}
 			</ul>
 
-			<input className="terminal__input" type="text" onKeyUp={runCommand} />
+			<input className="terminal__input"
+				   type="text"
+				   onKeyUp={runCommand} />
 		</div>
 	);
 };
