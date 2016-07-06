@@ -17,8 +17,6 @@ function pushWithId({ state, value }) {
 }
 
 module.exports = function commands(state = List(), action) {
-	console.log(action);
-
 	switch (action.type) {
 		case REQUEST_COMMAND:
 			state = pushWithId({ state, value: action.command });

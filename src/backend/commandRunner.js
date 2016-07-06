@@ -10,7 +10,11 @@ function CommandRunner() {
 CommandRunner.prototype = Object.create(EventEmitter.prototype);
 
 CommandRunner.prototype.begin = function begin(command) {
-	const childProcess = spawn(command);
+	const commandParts = command.split(' ');
+	const commandName = commandParts[0];
+	const args = commandParts.slice(1, commandParts.length);
+
+	const childProcess = spawn(commandName, args);
 
 	childProcess.stdout.on('data', data => this.emit('output', data.toString()));
 	childProcess.stderr.on('data', error => this.emit('error', error.toString()));

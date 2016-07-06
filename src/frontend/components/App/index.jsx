@@ -6,7 +6,7 @@ const commandsActions = require('../../actions/commandsActions');
 
 function App(props) {
 	const { output, runCommand } = props;
-	const outputChildren = output.map(o => <li key={o.id} className="output__item">{o.value}</li>); 
+	const outputChildren = output.map(o => <li key={o.id} className="output__item"><pre>{o.value}</pre></li>);
 
 	return (
 		<div className="terminal">
