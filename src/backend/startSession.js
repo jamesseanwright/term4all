@@ -17,17 +17,19 @@ function parseMessage(message) {
 module.exports = function startSession(websocket) {
 	console.log('WebSocket connection established!');
 
+	commandRunner.on('output', output => websocket.send(JSON.stringify({ output })));
+	commandRunner.on('error', error => websocket.send(JSON.stringify({ error })));
+	commandRunner.on('end', exitCode => websocket.send(JSON.stringify({ exitCode })));
+
 	websocket.on('message', function onMessage(message) {
 		const command = parseMessage(message);
 
 		if (!command) {
-			websocket.send({ error: 'Invalid payload' });
+			websocket.send(JSON.stringify({ error: 'Invalid payload' }));
+			websocket.send(JSON.stringify({ exitCode: -1 }));
+			return;
 		}
 
 		commandRunner.begin(command);
-
-		commandRunner.on('output', output => websocket.send(JSON.stringify({ output })));
-		commandRunner.on('error', error => websocket.send(JSON.stringify({ error })));
-		commandRunner.on('end', exitCode => websocket.send(JSON.stringify({ exitCode })));
 	});
 };

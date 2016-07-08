@@ -6,6 +6,7 @@ html, body, section[role="main"] {
 
 body {
 	margin: 0;
+	background: purple;
 }
 
 .terminal {
@@ -14,8 +15,6 @@ body {
 	color: white;
 	font-family: monospace;
 	font-size: 16px;
-	background: purple;
-
 	.terminal__output {
 		list-style-type: none;
 		padding: 0;
@@ -28,9 +27,5 @@ body {
 		font-size: inherit;
 		color: inherit;
 		width: 100%;
-	}
-
-	.terminal__input::-webkit-input-placeholder {
-		color: white;
 	}
 }

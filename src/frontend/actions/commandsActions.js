@@ -41,12 +41,10 @@ module.exports = {
 			dispatch(this._requestCommand(command));
 
 			commandClient.begin(command);
+
 			commandClient.on('output', output => dispatch(this._receiveCommandOutput(output)));
 			commandClient.on('error', error => dispatch(this._receiveCommandError(error)));
-			
-			commandClient.on('end', exitCode => {
-				dispatch(this._receiveCommandEnd(exitCode));
-			});
+			commandClient.once('end', exitCode => dispatch(this._receiveCommandEnd(exitCode)));
 		};
 	}
 };
