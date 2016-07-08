@@ -7,7 +7,7 @@ A JavaScript terminal emulator developed using Node.js, WebSockets, React, Redux
 ## Why Another Terminal Emulator?
 
 * It's a fun self-learning project
-* To provide users of Windows and Linux with a user-friendly way of using the command line, akin to iTerm2 for OS X
+* To provide developers working on Windows and Linux with a nicer way of using the command line, akin to iTerm2 for OS X
 
 ## Proposed Features
 
