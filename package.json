@@ -6,6 +6,7 @@
   "scripts": {
     "build": "./tasks/build.sh",
     "dev": "npm run build && node dist/backend/server",
+    "electron": "npm run build && electron dist/electron",
     "test": "\"echo \\\"No tests yet :(\\\"\""
   },
   "keywords": [

@@ -14,7 +14,11 @@ const assetsServer = http.createServer(assets);
 assets.use('/', express.static(__dirname + '/../frontend'));
 
 assetsServer.listen(PORT, () => {
-	console.log(`Assets server running on port ${PORT}...`);
+	console.log(`Frontend running on port ${PORT}...`);
+
+	if (process.send) {
+		process.send({ isBackendReady: true });
+	}
 });
 
 console.log('Awaiting WebSocket connection...');
