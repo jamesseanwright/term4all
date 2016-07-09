@@ -21,17 +21,14 @@
   "author": "James Wright <james@jamesswright.co.uk>",
   "license": "ISC",
   "devDependencies": {
-    "babel-core": "^6.10.4",
     "babel-preset-react": "6.11.1",
     "babelify": "7.3.0",
     "browserify": "13.0.1",
     "chai": "3.5.0",
     "electron-prebuilt": "1.2.5",
-    "glob": "^7.0.5",
     "jsdom": "9.4.1",
     "mocha": "2.5.3",
     "node-sass": "3.8.0",
-    "require-glob": "3.1.1",
     "sinon": "1.17.4"
   },
   "dependencies": {
