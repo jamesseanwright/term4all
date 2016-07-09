@@ -4,15 +4,21 @@ const EventEmitter = require('events');
 const spawn = require('child_process').spawn;
 
 function CommandRunner() {
-	this.shell = '/bin/bash';
+	this.shell = true;
 }
 
 CommandRunner.prototype = Object.create(EventEmitter.prototype);
 
-CommandRunner.prototype.begin = function begin(command) {
+CommandRunner.prototype._parseCommand = function parseCommand(command) {
 	const commandParts = command.split(' ');
 	const commandName = commandParts[0];
 	const args = commandParts.slice(1, commandParts.length);
+
+	return { commandName, args };
+};
+
+CommandRunner.prototype.begin = function begin(command) {
+	const { commandName, args } = this._parseCommand(command);
 
 	const childProcess = spawn(commandName, args, {
 		shell: this.shell
@@ -23,4 +29,4 @@ CommandRunner.prototype.begin = function begin(command) {
 	childProcess.on('close', exitCode => this.emit('end', exitCode.toString()));
 };
 
-module.exports = new CommandRunner();
+module.exports = CommandRunner;

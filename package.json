@@ -7,7 +7,7 @@
     "build": "./tasks/build.sh",
     "dev": "npm run build && node dist/backend/server",
     "electron": "npm run build && electron dist/electron",
-    "test": "\"echo \\\"No tests yet :(\\\"\""
+    "test": "npm run build && mocha dist/**/*-tests.js"
   },
   "keywords": [
     "terminal",
@@ -23,8 +23,12 @@
     "babel-preset-react": "6.11.1",
     "babelify": "7.3.0",
     "browserify": "13.0.1",
+    "chai": "^3.5.0",
     "electron-prebuilt": "1.2.5",
-    "node-sass": "3.8.0"
+    "jsdom": "^9.4.1",
+    "mocha": "^2.5.3",
+    "node-sass": "3.8.0",
+    "sinon": "^1.17.4"
   },
   "dependencies": {
     "express": "4.14.0",

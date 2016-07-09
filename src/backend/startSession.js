@@ -1,6 +1,7 @@
 'use strict';
 
-const commandRunner = require('./commandRunner');
+const CommandRunner = require('./CommandRunner');
+const commandRunner = new CommandRunner();
 
 function parseMessage(message) {
 	let parsedMessage;
