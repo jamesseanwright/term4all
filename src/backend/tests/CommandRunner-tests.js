@@ -28,4 +28,70 @@ describe('the command runner', function () {
 			expect(actualResult).to.deep.equal(expectedResult);
 		});
 	});
+
+	describe('the run method', function () {
+		const spawner = {
+			spawn() {}
+		};
+
+		const eventEmitter = {
+			on() {}
+		};
+
+		let mockSpawner;
+		let mockEmitter;
+		let commandRunner;
+
+		beforeEach(function () {
+			mockSpawner = sinon.mock(spawner);
+			mockEmitter = sinon.mock(eventEmitter);
+			commandRunner = new CommandRunner();
+		});
+
+		afterEach(function () {
+			mockSpawner.restore();
+			mockEmitter.restore();
+			commandRunner._parseCommand.restore();
+		});
+
+		it('should spawn the specified command and register to the process` listeners', function () {
+			const command = 'vim'
+
+			sinon.stub(commandRunner, '_parseCommand')
+				 .returns({
+					 commandName: command,
+					 args: []
+				 });
+
+			mockEmitter.expects('on')
+					   .withArgs('data', sinon.match.func)
+					   .onFirstCall();					   
+
+			mockEmitter.expects('on')
+					   .withArgs('data', sinon.match.func)
+					   .onSecondCall();					   
+
+			mockEmitter.expects('on')
+					   .withArgs('close', sinon.match.func)
+					   .onThirdCall();	
+
+			const childProcess = {
+				stdout: eventEmitter,
+				stderr: eventEmitter,
+				on: eventEmitter.on
+			};
+
+			mockSpawner.expects('spawn')
+					   .once()
+					   .withArgs(command, [], {
+						   shell: true
+					   })
+					   .returns(childProcess);
+
+			commandRunner.run({ command, _spawn: spawner.spawn });
+
+			mockSpawner.verify();
+			mockEmitter.verify();
+		});
+	});
 });

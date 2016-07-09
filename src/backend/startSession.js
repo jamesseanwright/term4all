@@ -31,6 +31,6 @@ module.exports = function startSession(websocket) {
 			return;
 		}
 
-		commandRunner.begin(command);
+		commandRunner.run({ command });
 	});
 };

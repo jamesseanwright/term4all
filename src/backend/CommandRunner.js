@@ -17,10 +17,10 @@ CommandRunner.prototype._parseCommand = function parseCommand(command) {
 	return { commandName, args };
 };
 
-CommandRunner.prototype.begin = function begin(command) {
+CommandRunner.prototype.run = function run({ command, _spawn = spawn }) {
 	const { commandName, args } = this._parseCommand(command);
 
-	const childProcess = spawn(commandName, args, {
+	const childProcess = _spawn(commandName, args, {
 		shell: this.shell
 	});
 
