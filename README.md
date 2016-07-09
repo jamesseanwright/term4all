@@ -11,11 +11,11 @@ A JavaScript terminal emulator developed using Node.js, WebSockets, React, Redux
 
 ## Features To Be Implemented
 
-[ ] Shell basics (directory navigation, `.bashrc` etc.)
-[ ] Split panes
-[ ] Tabs
-[ ] Keyboard shortcuts
-[ ] Autocomplete
+- [ ] Shell basics (directory navigation, `.bashrc` etc.)
+- [ ] Split panes
+- [ ] Tabs
+- [ ] Keyboard shortcuts
+- [ ] Autocomplete
 
 ## Local Development
 
