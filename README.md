@@ -9,11 +9,13 @@ A JavaScript terminal emulator developed using Node.js, WebSockets, React, Redux
 * It's a fun self-learning project
 * To provide developers working on Windows and Linux with a nicer way of using the command line, akin to iTerm2 for OS X
 
-## Proposed Features
+## Features To Be Implemented
 
-* Split panes
-* Tabs
-* Keyboard shortcuts
+[ ] Shell basics (directory navigation, `.bashrc` etc.)
+[ ] Split panes
+[ ] Tabs
+[ ] Keyboard shortcuts
+[ ] Autocomplete
 
 ## Local Development
 
