@@ -6,7 +6,7 @@ const WEBSOCKET_PORT = 9002;
 const http = require('http');
 const express = require('express');
 const { Server } = require('ws');
-const startSession = require('./startSession');
+const session = require('./session');
 const webSocketServer = new Server({ port: WEBSOCKET_PORT });
 const assets = express();
 const assetsServer = http.createServer(assets);
@@ -23,7 +23,7 @@ assetsServer.listen(PORT, () => {
 
 console.log('Awaiting WebSocket connection...');
 
-webSocketServer.on('connection', startSession);
+webSocketServer.on('connection', socket => session.start(socket));
 
 process.on('SIGTERM', () => {
 	assetsServer.close(() => {
