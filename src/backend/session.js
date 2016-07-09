@@ -16,19 +16,19 @@ module.exports = {
 		return parsedMessage.command ? parsedMessage.command : null;
 	},
 
-	start(websocket) {
+	start(webSocket) {
 		console.log('WebSocket connection established!');
 
-		commandRunner.on('output', output => websocket.send(JSON.stringify({ output })));
-		commandRunner.on('error', error => websocket.send(JSON.stringify({ error })));
-		commandRunner.on('end', exitCode => websocket.send(JSON.stringify({ exitCode })));
+		commandRunner.on('output', output => webSocket.send(JSON.stringify({ output })));
+		commandRunner.on('error', error => webSocket.send(JSON.stringify({ error })));
+		commandRunner.on('end', exitCode => webSocket.send(JSON.stringify({ exitCode })));
 
-		websocket.on('message', function onMessage(message) {
-			const command = this.parseMessage(message);
+		webSocket.on('message', message => {
+			const command = this._parseMessage(message);
 
 			if (!command) {
-				websocket.send(JSON.stringify({ error: 'Invalid payload' }));
-				websocket.send(JSON.stringify({ exitCode: -1 }));
+				webSocket.send(JSON.stringify({ error: 'Invalid payload' }));
+				webSocket.send(JSON.stringify({ exitCode: -1 }));
 				return;
 			}
 
