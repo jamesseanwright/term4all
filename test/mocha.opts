@@ -1,1 +1,2 @@
 --require ./test/init
+--require ./test/renderComponent
