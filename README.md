@@ -30,3 +30,4 @@ A JavaScript terminal emulator developed using Node.js, WebSockets, React, Redux
 * `npm run build` - outputs the distributable code to the `dist` dir
 * `npm run dev` - runs the build script and runs the server
 * `npm run electron` - runs the build script and runs the terminal as an Electron app
+* `npm test` - runs the unit tests

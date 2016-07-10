@@ -1,7 +1,6 @@
 'use strict';
 
 const React = require('react');
-const commandsActions = require('../../actions/commandsActions');
 
 function App(props) {
 	const { output, runCommand } = props;

@@ -1,2 +1,3 @@
+--require blanket
 --require ./test/init
 --require ./test/renderComponent
