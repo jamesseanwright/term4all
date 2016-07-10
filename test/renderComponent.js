@@ -7,7 +7,7 @@ const ReactDOMServer = require('react-dom/server');
 global.renderComponent = function renderComponent(Component, props) {
 	return new Promise((resolve, reject) => {
 		const reactElement = React.createElement(Component, props);		
-		const markup = ReactDOMServer.renderToString(reactElement);
+		const markup = ReactDOMServer.renderToStaticMarkup(reactElement);
 
 		jsdom.env(markup, (err, window) => {
 			if (err) {

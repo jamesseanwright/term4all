@@ -23,7 +23,9 @@ describe('the App component', function () {
 		return renderComponent(App, props).then(element => {
 			const listItems = element.querySelectorAll('.terminal__output .output__item');
 
-			console.log(element.innerHTML);
+			expect(listItems.length).to.equal(2);
+			expect(listItems[0].textContent).to.equal('ls ~');
+			expect(listItems[1].textContent).to.equal('Documents');
 		});
 	});
 });
