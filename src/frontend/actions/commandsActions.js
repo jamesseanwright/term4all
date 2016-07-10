@@ -1,6 +1,7 @@
 'use strict';
 
-const commandClient = require('../clients/commandClient');
+const CommandClient = require('../clients/CommandClient');
+const commandClient = new CommandClient();
 
 module.exports = { 
 	REQUEST_COMMAND: 'REQUEST_COMMAND',
@@ -40,11 +41,11 @@ module.exports = {
 		return (dispatch, getState) => {
 			dispatch(this._requestCommand(command));
 
-			commandClient.begin(command);
-
 			commandClient.on('output', output => dispatch(this._receiveCommandOutput(output)));
 			commandClient.on('error', error => dispatch(this._receiveCommandError(error)));
 			commandClient.on('end', exitCode => dispatch(this._receiveCommandEnd(exitCode)));
+		
+			commandClient.begin(command);	
 		};
 	}
 };

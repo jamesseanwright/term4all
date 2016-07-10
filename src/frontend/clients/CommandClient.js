@@ -47,4 +47,4 @@ CommandClient.prototype.onMessage = function onMessage(message) {
 	}
 };
 
-module.exports = new CommandClient();
+module.exports = CommandClient;
