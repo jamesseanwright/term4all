@@ -23,7 +23,7 @@ describe('the App component', function () {
 		return renderComponent(App, props).then(element => {
 			const listItems = element.querySelectorAll('.terminal__output .output__item');
 
-			console.log(listItems);
+			console.log(element.innerHTML);
 		});
 	});
 });
