@@ -2,6 +2,7 @@
 
 const CommandRunner = require('./CommandRunner');
 const commandRunner = new CommandRunner();
+const specialCommands = require('./specialCommands');
 
 module.exports = {
 	_parseMessage(message) {
@@ -29,6 +30,14 @@ module.exports = {
 			if (!command) {
 				webSocket.send(JSON.stringify({ error: 'Invalid payload' }));
 				webSocket.send(JSON.stringify({ exitCode: -1 }));
+				return;
+			}
+
+			if (specialCommands[command]) {
+				specialCommands[command].then(result => {
+					webSocket.send(JSON.stringify(result));					
+				});
+
 				return;
 			}
 
