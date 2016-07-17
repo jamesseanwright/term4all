@@ -4,7 +4,9 @@
  * Since this is intended to be a singleton
  * used across the codebase, this pattern can
  * result in race conditions. Tech debt raised
- * to update this: */
+ * to update this:
+ * https://github.com/jamesseanwright/term4all/issues/1
+ */
 
 const EventEmitter = require('events');
 
@@ -42,12 +44,6 @@ CommandClient.prototype.onMessage = function onMessage(message) {
 		case 'exitCode':
 			this.emit('exitCode', message.exitCode);
 
-			/* While EventEmitter.prototype.once
-			 * could be used, this isn't ideal for
-			 * stdout and stderr data as the user might be interacting
-			 * with a long-running process, like a CLI. Thus, for
-			 * consistency, all other listeners are removed once exit
-			 * code is received */
 			this.removeAllListeners('output');
 			this.removeAllListeners('error');
 			this.removeAllListeners('exitCode');
